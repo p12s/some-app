@@ -20,6 +20,9 @@ onMounted(() => {
   })
 })
 
+const addCount = (): void => {
+  count.value!++
+}
 </script>
 
 <template>
@@ -27,7 +30,7 @@ onMounted(() => {
     <h2>{{ appInfo.name }}</h2>
     <h3>{{ appInfo.content }}</h3>
     <h4>{{ count }}</h4>
-    <button @click="count++">
+    <button @click="addCount">
       Press me
     </button>
   </div>
