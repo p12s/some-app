@@ -1,29 +1,40 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import {ref, reactive, readonly, onMounted} from 'vue'
+import fetchCount from "../fetchCount";
+
+interface AppInfo {
+  name: string,
+  content: string
+}
+
+const appInfo: AppInfo = reactive({
+  name: 'Counter',
+  content: 'hello from some app!'
+})
+
+const count = ref<number | null>(null)
+
+onMounted(() => {
+  fetchCount((initialCount) => {
+    count.value = initialCount
+  })
+})
+
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h2>{{ appInfo.name }}</h2>
+    <h3>{{ appInfo.content }}</h3>
+    <h4>{{ count }}</h4>
+    <button @click="count++">
+      Press me
+    </button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+  body {
+    background-color: #888888;
+  }
 </style>
