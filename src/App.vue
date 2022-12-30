@@ -31,7 +31,10 @@ const addCount = (): void => {
     <h3>{{ appInfo.content }}</h3>
     <h4>{{ count }}</h4>
     <button @click="addCount">
-      Press me
+      Press to increase counter
+    </button>
+    <button @click="$console.log(count)">
+      Console log counter
     </button>
   </div>
 </template>
